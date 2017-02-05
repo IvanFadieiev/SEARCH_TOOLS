@@ -13,6 +13,3 @@ module Search
     # -- all .rb files in that directory are automatically loaded.
   end
 end
-
-Dir[Rails.root + 'lib/**/**/*.rb'].each{ |file| require file }
-ActiveRecord::Base.include(Service::Search)
