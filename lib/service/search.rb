@@ -5,12 +5,12 @@ module Service
     module ClassMethods
       class_eval do
         define_method(:search) do |line|
-          result = []
+          all_ids = []
           @args.each do |arg|
-            res = where("#{arg.to_s} ILIKE ?", "%#{line}%")
-            result << res.to_a
+            ids = where("#{arg.to_s} ILIKE ?", "%#{line}%").try(:pluck,:id)
+            all_ids << ids
           end
-          return result.flatten
+          where(id: all_ids.flatten)
         end
       end
       
